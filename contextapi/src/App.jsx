@@ -1,35 +1,35 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { createContext, useState } from 'react'
 import './App.css'
+import Child1 from './Child1'
+
+//Creating Context
+
+const data1 = createContext();
+const data2 = createContext();
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const [count, setCount] = useState(10)
+
+  console.log("APP component rendered");
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <h1>App Component's Children</h1>
+
+      <data1.Provider value={count}>
+        <data2.Provider value={setCount}>
+          <Child1 />
+        </data2.Provider>
+      </data1.Provider>
+
+
+      {/* <Child1 count={count} setCount={setCount} /> */}
+
     </>
   )
 }
 
 export default App
+
+export { data1, data2 };
